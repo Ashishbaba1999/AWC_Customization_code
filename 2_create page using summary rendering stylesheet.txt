@@ -1,0 +1,27 @@
+// use injection of subrendring sylesheet
+
+<inject type="dataset" src="P2SCV_InjectStylesheet"/>
+
+
+//OR directly edit rendring stylesheet as below
+
+<page titleKey="AWC Custom Page">
+	    <column width="50%">
+	        <section titleKey="Custom Property">
+			    <content visibleWhen="object_desc==AWC" >
+	                <property name="t2type"/>
+	            </content>
+			    <content visibleWhen="object_desc!=AWC" >
+	                <property name="t2type" modifiable="false" />
+	            </content>
+	        </section>
+	    </column>
+	    <column width="50%">
+	        <section titleKey="OOTB Property">
+	            <property name="item_id" renderingHint="label"/>
+                <property name="item_revision_id" renderingHint="label"/>
+                <property name="object_name"/>
+				<property name="object_type"/>
+	        </section>
+	    </column>
+	</page>

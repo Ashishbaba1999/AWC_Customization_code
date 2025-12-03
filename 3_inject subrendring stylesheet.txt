@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+// @<COPYRIGHT>@
+// ==================================================
+// Copyright 2017.
+// Siemens Product Lifecycle Management Software Inc.
+// All Rights Reserved.
+// ==================================================
+// @<COPYRIGHT>@
+-->
+<!-- Style sheet rendering for Audit Log Page for EPMJob,EPMTask
+ -->
+
+<subRendering>
+
+	<page title="SCV">
+	<column width="50%">
+	<section titleKey="ootb properties">
+	<property name="item_id" renderingHint="label"/>
+    <property name="item_revision_id" renderingHint="label"/>
+    <property name="object_name"/>
+	<property name="object_type"/>
+	</section>
+	</column>
+	<column width="50%">
+	<section titleKey="csv properties">
+	<property name="p2CSV_test_status"/>
+	<property name="p2CSV_configuration_notes"/>
+	</section>
+	</column>
+	<section titleKey="Info">
+	<tableProperty name="p2SCV_InfoTable">
+	<property name="p2customerName"/>
+	<property name="p2projectCode"/>
+	</tableProperty>
+	</section>
+	
+	</page>
+</subRendering>

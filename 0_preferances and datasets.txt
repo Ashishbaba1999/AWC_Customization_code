@@ -1,0 +1,7 @@
+AWC_Item.CREATERENDERING=Awp0ItemCreate
+AWC_P2SCV_Item.CREATERENDERING=Awp0P2SCV_ItemCreate
+
+AWC_ItemRevision.SUMMARYRENDERING=Awp0ItemRevSummary
+AWC_P2SCV_ItemRevision.SUMMARYRENDERING=Awp0P2SCV_ItemRevSummary
+
+P2SCV_InjectStylesheet
