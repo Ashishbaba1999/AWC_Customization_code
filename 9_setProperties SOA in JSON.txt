@@ -1,0 +1,57 @@
+{
+    "commands": {
+        "CCSpart": {
+            "iconId": "cmd02BrushedMetal",
+            "title": "{{i18n.CCSpartTitle}}",
+            "description": "{{i18n.CCSpartDescription}}"
+        }
+    },
+    "commandHandlers": {
+        "CCSpartHandler": {
+            "id": "CCSpart",
+            "action": "activateCCSpart",
+            "activeWhen": true,
+            "visibleWhen": {
+                "condition": "conditions.objectIsSelected"
+            }
+        }
+    },
+    "commandPlacements": {
+        "CCSpartaw_globalNavigationbar": {
+            "id": "CCSpart",
+            "uiAnchor": "aw_globalNavigationbar",
+            "priority": 100
+        }
+    },
+    "actions": {
+        "activateCCSpart": {
+            "actionType": "TcSoaService",
+            "serviceName": "Core-2010-09-DataManagement",
+            "method": "setProperties",
+            
+            "inputData": {
+                "info": [{
+                     "object": "{{ctx.selected}}",
+                     "vecNameVal":[{
+                     "name": "object_desc",
+                     "values": ["Change Management CCS Part"]
+                                  }]
+                }]
+            }
+        }
+    },
+    
+    "conditions": {
+        "objectIsSelected": {
+             "expression": "ctx.selected.type==='A2CCS_PartRevision'"  // visible when condition applied here after clicking this IR only
+        }
+    },
+    "i18n": {
+        "CCSpartTitle": [
+            "createCCSitemJSONMessages"
+        ],
+        "CCSpartDescription": [
+            "createCCSitemJSONMessages"
+        ]
+    }
+}
