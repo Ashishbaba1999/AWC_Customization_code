@@ -1,0 +1,62 @@
+{
+    "commands": {
+        "CCSpart": {
+            "iconId": "cmd02BrushedMetal",
+            "title": "{{i18n.CCSpartTitle}}",
+            "description": "{{i18n.CCSpartDescription}}"
+        }
+    },
+    "commandHandlers": {
+        "CCSpartHandler": {
+            "id": "CCSpart",
+            "action": "activateCCSpart",
+            "activeWhen": true,
+            "visibleWhen": {
+                "condition": "conditions.objectIsSelected"
+            }
+        }
+    },
+    "commandPlacements": {
+        "CCSpartaw_globalNavigationbar": {
+            "id": "CCSpart",
+            "uiAnchor": "aw_globalNavigationbar",
+            "priority": 100
+        }
+    },
+    "actions": {
+        "activateCCSpart": {
+            "actionType": "TcSoaService",
+            "serviceName": "Workflow-2008-06-Workflow",
+            "method": "createInstance",
+            
+             "inputData": {
+                "startImmediately": true,
+                "observerKey": "",
+                "name": "TCM Release Process",
+                "subject": "",
+                "description": "",
+                "contextData": {
+                    "processTemplate": "TCM Release Process",
+                    "attachmentCount": "{{ctx.selected.length}}",
+                    "attachments": ["{{ctx.selected.uid}}"],
+                    "attachmentTypes": ["1"]
+                    
+                }
+            }
+        }
+    },
+    
+    "conditions": {
+        "objectIsSelected": {
+             "expression": "ctx.selected.type==='A2CCS_PartRevision'"  
+        }
+    },
+    "i18n": {
+        "CCSpartTitle": [
+            "createCCSitemJSONMessages"
+        ],
+        "CCSpartDescription": [
+            "createCCSitemJSONMessages"
+        ]
+    }
+}
