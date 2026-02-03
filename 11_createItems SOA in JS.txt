@@ -1,0 +1,98 @@
+//////commandViewModel.json///////////
+{
+    "commands": {
+        "CCS_Part": {
+            "iconId": "cmd05Flat",
+            "title": "{{i18n.CCS_PartTitle}}",
+            "description": "{{i18n.CCS_PartDescription}}"
+        }
+    },
+    "commandHandlers": {
+        "CCS_PartHandler": {
+            "id": "CCS_Part",
+            "action": "activateCCS_Part",
+            "activeWhen": true,
+            "visibleWhen": {
+                "condition": "conditions.true"
+            }
+        }
+    },
+    "commandPlacements": {
+        "CCS_Partaw_globalNavigationbar": {
+            "id": "CCS_Part",
+            "uiAnchor": "aw_globalNavigationbar",
+            "priority": 100
+        }
+    },
+    "actions": {
+        "activateCCS_Part": {
+            "actionType": "JSFunction",
+            "method": "createItemjs",
+            "deps": "js/CCS_PartService",
+            "inputData": {
+                "text": "{{data}}"
+            }
+        }
+    },
+    "conditions": {
+        "objectIsSelected": {
+            "expression": "ctx.selected"
+        }
+    },
+    "i18n": {
+        "CCS_PartTitle": [
+            "itemsJSMessages"
+        ],
+        "CCS_PartDescription": [
+            "itemsJSMessages"
+        ]
+    }
+}
+
+
+////////////////////CCS_PartService.js ////////////////////////////
+
+
+/**
+ * Simple Alert service for sample command Handlers
+ *
+ * @module js/CCS_PartService
+ */
+
+/**
+ * Dummy alert.
+ * @param {String} text - text to display
+ */
+import appCtxSvc from 'js/appCtxService';
+import soaSvc from 'soa/kernel/soaService';
+import messagingSvc from 'js/messagingService';
+
+var exports={};
+
+export let createItemjs = function( text ) {
+    var inputs={
+        properties:
+            [{
+            clientId: "CCS",
+            itemId: "",
+            name: "CCStest654",
+            type: "P4CCS_Product",
+            revId: "A",
+            description: "Code Chain Supply"           
+            }]
+    }
+    soaSvc.postUnchecked('Core-2006-03-DataManagement', 'createItems',inputs).then(
+        function(response){
+            messagingService.showInfo("Item create Successfully!!!");
+        }
+    )
+    
+};
+
+
+
+export default exports={
+    createItemjs
+};
+
+////////////////////////////////////////////////////////////////////////////////////
