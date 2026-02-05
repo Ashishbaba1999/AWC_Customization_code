@@ -1,0 +1,49 @@
+///////////////Edited JSON file/////////////////
+    "actions": {
+        "activateCCS_Part_prop": {
+            "actionType": "JSFunction",
+            "method": "setPropertyDesc",
+            "deps": "js/CCS_Part_propService",
+            "inputData": {
+                "data": "{{data}}"
+            }
+        }
+///////////////Edited JS file////////////////////
+/**
+ * Simple Alert service for sample command Handlers
+ *
+ * @module js/CCS_Part_propService
+ */
+
+/**
+ * Dummy alert.
+ * @param {String} text - text to display
+ */
+import appCtxSvc from 'js/appCtxService';
+import soaSvc from 'soa/kernel/soaService';
+import messagingService from 'js/messagingService';
+
+var exports={};
+
+export let setPropertyDesc = function( text ) {
+    var object={
+        uid:appCtxSvc.ctx.selected.uid,
+        type:appCtxSvc.ctx.selected.type,
+
+    }
+    var input=[];
+    var info=[];
+    input.vecNameVal=[];
+    input.object=object;
+    input.vecNameVal.push({name:"object_desc",values:["Panasonic Code Chain Supply"]});
+    info.push(input);
+        soaSvc.postUnchecked('2010-09-DataManagement', 'setProperties',{info:info,options:[]}).then(
+        function(response){
+            messagingService.showInfo("Property Set Successfully!!!");
+        });
+};
+
+export default exports={
+    setPropertyDesc
+};
+//////////////////////////////////////////////////////////////////////////////////////
