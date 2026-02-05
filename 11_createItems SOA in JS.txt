@@ -65,7 +65,7 @@
  */
 import appCtxSvc from 'js/appCtxService';
 import soaSvc from 'soa/kernel/soaService';
-import messagingSvc from 'js/messagingService';
+import messagingService from 'js/messagingService';
 
 var exports={};
 
@@ -96,3 +96,4 @@ export default exports={
 };
 
 ////////////////////////////////////////////////////////////////////////////////////
+
