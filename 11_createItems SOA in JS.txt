@@ -84,8 +84,7 @@ export let createItemjs = function( text ) {
     soaSvc.postUnchecked('Core-2006-03-DataManagement', 'createItems',inputs).then(
         function(response){
             messagingService.showInfo("Item create Successfully!!!");
-        }
-    )
+        });
     
 };
 
@@ -96,4 +95,5 @@ export default exports={
 };
 
 ////////////////////////////////////////////////////////////////////////////////////
+
 
