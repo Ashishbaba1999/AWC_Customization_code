@@ -1,0 +1,116 @@
+//create Panel for Item creation using toolsAndInfo command and calling createItems SOA In JS by taking input from users
+
+/////CCS_ProductsView.html//////////
+<aw-command-panel caption="i18n.CCS_ProductsTitle">
+    <aw-panel-header>
+        <aw-panel-section caption="i18n.header" >
+            <aw-textbox prop="data.itemID"></aw-textbox>
+            <aw-textbox prop="data.itemName"></aw-textbox>
+            <aw-textbox prop="data.itemDesc"></aw-textbox>
+        </aw-panel-section>
+    </aw-panel-header>
+   
+    <aw-panel-footer>
+        <aw-panel-section caption="i18n.footer">
+            <aw-button action="createItem" >
+                <aw-i18n>i18n.save</aw-i18n>
+            </aw-button>
+        </aw-panel-section>
+    </aw-panel-footer>
+</aw-command-panel>
+
+
+///////////////////CCS_ProductsViewModel.json///////////////////
+
+{
+    "schemaVersion": "1.0.0",
+    "actions": {
+        "createItem": {
+            "actionType": "JSFunction",
+            "method": "createItemJS",
+            "deps": "js/createItemService",
+            "inputData": {
+                "data":"{{data}}"
+            }
+        }
+    },
+    "data": {
+        "itemID": {
+            "displayName": "Item ID",
+            "type": "STRING",
+            "isRequired": "true",
+            "disValue": "",
+            "dbValue": ""
+        },
+        "itemName": {
+            "displayName": "Item Name",
+            "type": "STRING",
+            "isRequired": "true",
+            "disValue": "",
+            "dbValue": ""
+        },
+        "itemDesc": {
+            "displayName": "Item Description",
+            "type": "STRING",
+            "isRequired": "true",
+            "disValue": "",
+            "dbValue": ""
+        }
+    },
+    "i18n": {
+        "CCS_ProductsTitle": [ "customPanelMessages" ],
+        "header": [ "customPanelMessages" ],
+        "body": [ "customPanelMessages" ],
+        "footer": [ "customPanelMessages" ],
+        "save": [ "customPanelMessages" ],
+        "checkBoxName": [ "customPanelMessages" ],
+        "textValue": [ "customPanelMessages" ]
+    }
+}
+
+
+///////////////////////////new file >>createItemService.js<< //////////////////////////
+
+
+
+/**
+ * Simple Alert service for sample command Handlers
+ *
+ * @module js/createItemService
+ */
+
+/**
+ * Dummy alert.
+ * @param {String} text - text to display
+ */
+import appCtxSvc from 'js/appCtxService';
+import soaSvc from 'soa/kernel/soaService';
+import messagingService from 'js/messagingService';
+
+var exports={};
+
+export let createItemJS = function( data ) {
+    var inputs={
+        properties:
+            [{
+            clientId: "CCS",
+            itemId: data.itemID.dbValue,
+            name: data.itemName.dbValue,
+            type: "Item",
+            revId: "A",
+            description: data.itemDesc.dbValue      
+            }]
+    }
+    soaSvc.postUnchecked('Core-2006-03-DataManagement', 'createItems',inputs).then(
+        function(response){
+            messagingService.showInfo("Item create Successfully!!!");
+        });
+    
+};
+
+
+
+export default exports={
+    createItemJS
+};
+//////////////////////////////////////////////////////////////////////////////////////////
